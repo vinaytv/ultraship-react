@@ -6,8 +6,11 @@ RUN npm ci
 COPY . .
 RUN npm run build
 
-# Stage 2: serve
-FROM nginx:alpine
-COPY --from=build /app/dist /usr/share/nginx/html
+# Stage 2: serve with port-aware static server
+FROM node:20-alpine AS runtime
+WORKDIR /app
+RUN npm install -g serve
+COPY --from=build /app/dist ./dist
+ENV PORT=80
 EXPOSE 80
-CMD ["nginx", "-g", "daemon off;"]
+CMD ["sh", "-c", "serve -s dist -l ${PORT}"]
