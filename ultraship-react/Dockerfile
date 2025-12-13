@@ -11,6 +11,7 @@ FROM node:20-alpine AS runtime
 WORKDIR /app
 RUN npm install -g serve
 COPY --from=build /app/dist ./dist
-ENV PORT=80
-EXPOSE 80
-CMD ["sh", "-c", "serve -s dist -l ${PORT}"]
+ENV PORT=3000
+EXPOSE 3000
+# Railway/Render/Heroku inject PORT; default to 3000 if unset
+CMD ["sh", "-c", "serve -s dist -l ${PORT:-3000}"]
