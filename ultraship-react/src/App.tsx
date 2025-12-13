@@ -6,6 +6,7 @@ import { EmployeeGrid, Employee } from "./components/EmployeeGrid";
 import { EmployeeTiles } from "./components/EmployeeTiles";
 import { LOGIN, SIGN_UP, EMPLOYEE_BY_ID, EMPLOYEES_PAGE, UPDATE_EMPLOYEE } from "./graphql";
 import { LookupItem } from "./types";
+const API_BASE = (import.meta.env.VITE_API_BASE_URL || "").replace(/\/$/, "");
 
 const AppHome: React.FC = () => {
   const [isAuthed, setIsAuthed] = useState(false);
@@ -193,7 +194,7 @@ const AppHome: React.FC = () => {
       try {
         setClassLoading(true);
         setClassError(null);
-        const res = await fetch("/api/lookup/classes", {
+        const res = await fetch(`${API_BASE}/api/lookup/classes`, {
           headers: {
             ...authHeader
           }
@@ -208,7 +209,7 @@ const AppHome: React.FC = () => {
       try {
         setSubjectsLoading(true);
         setSubjectsError(null);
-        const res = await fetch("/api/lookup/subjects", {
+        const res = await fetch(`${API_BASE}/api/lookup/subjects`, {
           headers: {
             ...authHeader
           }
