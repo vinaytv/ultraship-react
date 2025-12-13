@@ -7,11 +7,11 @@ export default defineConfig({
     port: 5173,
     proxy: {
       "/graphql": {
-        target: "https://ultraship-backend-4.onrender.com:8080",
+        target: "http://ultraship-backend-4.onrender.com",
         changeOrigin: true
       },
       "/api": {
-        target: "http://localhosthttps://ultraship-backend-4.onrender.com:8080",
+        target: "http://ultraship-backend-4.onrender.com",
         changeOrigin: true
       }
     }
