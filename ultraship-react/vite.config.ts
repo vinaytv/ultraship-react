@@ -4,14 +4,14 @@ import react from "@vitejs/plugin-react-swc";
 export default defineConfig({
   plugins: [react()],
   server: {
-    port: 5173,
+    port: 3000,
     proxy: {
       "/graphql": {
-        target: "https://ultraship-backend-4.onrender.com",
+        target: process.env.VITE_DEV_PROXY_TARGET || "http://localhost:8080",
         changeOrigin: true
       },
       "/api": {
-        target: "https://ultraship-backend-4.onrender.com",
+        target: process.env.VITE_DEV_PROXY_TARGET || "http://localhost:8080",
         changeOrigin: true
       }
     }
